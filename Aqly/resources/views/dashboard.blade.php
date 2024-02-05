@@ -66,6 +66,7 @@
             padding: 2rem;
             max-width: 400px;
             margin: 0 auto;
+            margin-left: 50%;
         }
 
         .welcome-message {
@@ -86,7 +87,7 @@
 <body>
     <!-- Navigation bar -->
     <div class="navbar">
-        <a href="#" class="navbar-link">Home</a>
+        <a href="{{url('/')}}" class="navbar-link">Home</a>
         <!-- Add more links as needed -->
     </div>
 
