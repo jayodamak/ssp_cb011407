@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ProductCategory;
 use App\Http\Requests\StoreProductCategoryRequest;
 use App\Http\Requests\UpdateProductCategoryRequest;
+use GuzzleHttp\Handler\Proxy;
 
 class ProductCategoryController extends Controller
 {
@@ -14,7 +15,7 @@ class ProductCategoryController extends Controller
     public function index()
     {
         return view('admin.product_category.index', [
-            'product_categories' => ProductCategory::paginate(10)
+            'product_categories' => ProductCategory::orderBy('id','DESC')->paginate(10)
         ]);
     }
 
@@ -23,7 +24,9 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.product_category.form');
+        return view('admin.product_category.form', [
+        'product_Category' => new ProductCategory()
+    ]);
     }
 
     /**
@@ -32,7 +35,7 @@ class ProductCategoryController extends Controller
     public function store(StoreProductCategoryRequest $request)
     {
         (new ProductCategory())->create($request->all());
-        return redirect()->route('product-category.index');
+        return redirect()->route('product-category.index')->with('success', 'Product category created successfully');
     }
 
     /**
@@ -40,7 +43,7 @@ class ProductCategoryController extends Controller
      */
     public function show(ProductCategory $productCategory)
     {
-        //
+    
     }
 
     /**
@@ -48,15 +51,19 @@ class ProductCategoryController extends Controller
      */
     public function edit(ProductCategory $productCategory)
     {
-        //
+        return view('admin.product_category.form', [
+            'product_Category' => $productCategory
+        ]);
     }
+    
 
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateProductCategoryRequest $request, ProductCategory $productCategory)
     {
-        //
+        $productCategory->update($request->all());
+        return redirect()->route('product-category.index')->with('success', 'Product category updated successfully');
     }
 
     /**
@@ -66,6 +73,6 @@ class ProductCategoryController extends Controller
     {
         $productCategory->delete();
 
-        return redirect()->route('product-category.index');
+        return redirect()->route('product-category.index')->with('success', 'Product category deleted successfully');
     }
 }

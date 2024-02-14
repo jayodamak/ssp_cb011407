@@ -588,6 +588,7 @@
                 @else
                     <!-- <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a> -->
 
+
                  @if (Route::has('register'))
                         <a style="color: #e53637;" href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Sign up</a>
                     @endif
